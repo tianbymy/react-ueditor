@@ -350,7 +350,7 @@ class ReactUeditor extends React.Component {
         this.isContentChangedByWillReceiveProps = false
         this.ueditor.setContent(this.content)
       } else {
-        this.ueditor.setContent(value)
+        this.ueditor.setContent(this.content)
       }
 
       onReady && onReady()
