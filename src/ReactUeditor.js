@@ -26,7 +26,8 @@ const uploadAudioIcon = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgC
 class ReactUeditor extends React.Component {
   constructor(props) {
     super(props)
-    this.content = props.value || '' // 存储编辑器的实时数据，用于传递给父组件
+    //this.content = props.value || '' // 存储编辑器的实时数据，用于传递给父组件
+    this.content == props.editValue
     this.ueditor = null
     this.isContentChangedByWillReceiveProps = false
     this.tempfileInput = null
