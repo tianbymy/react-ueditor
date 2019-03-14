@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ifanrx/react-ueditor.git"
+    "url": "git+https://github.com/tianbymy/react-ueditor.git"
   },
   "keywords": [
     "ueditor",
@@ -19,9 +19,9 @@
   "author": "KaiLunYao",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ifanrx/react-ueditor/issues"
+    "url": "https://github.com/tianbymy/react-ueditor/issues"
   },
-  "homepage": "https://github.com/ifanrx/react-ueditor#readme",
+  "homepage": "https://github.com/tianbymy/react-ueditor#readme",
   "files": [
     "lib",
     "LICENSE",
