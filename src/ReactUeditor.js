@@ -27,7 +27,7 @@ class ReactUeditor extends React.Component {
   constructor(props) {
     super(props)
     //this.content = props.value || '' // 存储编辑器的实时数据，用于传递给父组件
-    this.content == props.editValue
+    this.content == props.editValue || ''
     this.ueditor = null
     this.isContentChangedByWillReceiveProps = false
     this.tempfileInput = null
@@ -67,12 +67,12 @@ class ReactUeditor extends React.Component {
   }
 
   componentDidMount() {
-    let {ueditorPath} = this.props
+    let { ueditorPath } = this.props
     if (!window.UE && !window.UE_LOADING_PROMISE) {
       window.UE_LOADING_PROMISE = this.createScript(ueditorPath + '/ueditor.config.js').then(() => {
-        return this.props.debug
-          ? this.createScript(ueditorPath + '/ueditor.all.js')
-          : this.createScript(ueditorPath + '/ueditor.all.min.js')
+        return this.props.debug ?
+          this.createScript(ueditorPath + '/ueditor.all.js') :
+          this.createScript(ueditorPath + '/ueditor.all.min.js')
       })
     }
     window.UE_LOADING_PROMISE.then(() => {
@@ -159,7 +159,7 @@ class ReactUeditor extends React.Component {
   }
 
   registerUploadVideo = () => {
-    let {uploadVideo, progress} = this.props
+    let { uploadVideo, progress } = this.props
     let newExtendControls = [{
       name: this.getRegisterUIName('videoUpload'),
       menuText: '上传视频',
@@ -167,7 +167,8 @@ class ReactUeditor extends React.Component {
       cssRules: 'background-position: -320px -20px;',
       component: <VideoUploader upload={uploadVideo} progress={progress} onChange={this.videoChange} />,
       onClose: () => {
-        this.setState({[this.getVisibleName('videoUpload')]: false})
+        this.setState({
+          [this.getVisibleName('videoUpload')]: false })
       },
       onConfirm: () => {
         if (this.ueditor) {
@@ -185,7 +186,7 @@ class ReactUeditor extends React.Component {
   }
 
   registerUploadAudio = () => {
-    let {uploadAudio, progress} = this.props
+    let { uploadAudio, progress } = this.props
     let newExtendControls = [{
       name: this.getRegisterUIName('audioUpload'),
       menuText: '上传音频',
@@ -193,7 +194,8 @@ class ReactUeditor extends React.Component {
       cssRules: 'background: url(' + uploadAudioIcon + ') !important; background-size: 20px 20px !important;',
       component: <AudioUploader upload={uploadAudio} progress={progress} onChange={this.audioChange} />,
       onClose: () => {
-        this.setState({[this.getVisibleName('audioUpload')]: false})
+        this.setState({
+          [this.getVisibleName('audioUpload')]: false })
       },
       onConfirm: () => {
         if (this.ueditor) {
@@ -218,7 +220,8 @@ class ReactUeditor extends React.Component {
       cssRules: 'background-position: -504px 0px;',
       component: <Link onChange={this.linkChange} />,
       onClose: () => {
-        this.setState({[this.getVisibleName('insertLink')]: false})
+        this.setState({
+          [this.getVisibleName('insertLink')]: false })
       },
       onConfirm: () => {
         this.ueditor && this.ueditor.execCommand('inserthtml', this.state.linkHtml, true)
@@ -231,19 +234,19 @@ class ReactUeditor extends React.Component {
   }
 
   videoChange = videoHtml => {
-    this.setState({videoHtml})
+    this.setState({ videoHtml })
   }
 
   audioChange = audioHtml => {
-    this.setState({audioHtml})
+    this.setState({ audioHtml })
   }
 
   linkChange = linkHtml => {
-    this.setState({linkHtml})
+    this.setState({ linkHtml })
   }
 
   uploadImage = e => {
-    let {uploadImage} = this.props
+    let { uploadImage } = this.props
     if (uploadImage) {
       let promise = uploadImage(e)
       if (!!promise && typeof promise.then == 'function') {
@@ -269,7 +272,7 @@ class ReactUeditor extends React.Component {
   }
 
   handlePasteImage = () => {
-    let {pasteImageStart, handlePasteImage, pasteImageDone} = this.props
+    let { pasteImageStart, handlePasteImage, pasteImageDone } = this.props
     if (!handlePasteImage) return
 
     let html = this.ueditor.getContent()
@@ -303,7 +306,7 @@ class ReactUeditor extends React.Component {
   }
 
   initEditor = () => {
-    const {config, plugins, onChange, value, getRef, onReady} = this.props
+    const { config, plugins, onChange, value, getRef, onReady } = this.props
 
     if (plugins && plugins instanceof Array && plugins.length > 0) {
       if (plugins.indexOf('uploadImage') !== -1) this.registerImageUpload()
@@ -320,7 +323,8 @@ class ReactUeditor extends React.Component {
           title: control.menuText,
           cssRules: control.cssRules ? control.cssRules : '',
           onclick: () => {
-            editor._react_ref.setState({[this.getVisibleName(control.name)]: true})
+            editor._react_ref.setState({
+              [this.getVisibleName(control.name)]: true })
           },
         })
 
@@ -359,8 +363,8 @@ class ReactUeditor extends React.Component {
   }
 
   render() {
-    let {extendControls} = this.state
-    let {multipleImagesUpload} = this.props
+    let { extendControls } = this.state
+    let { multipleImagesUpload } = this.props
 
     return (
       <div>
