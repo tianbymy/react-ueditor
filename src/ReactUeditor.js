@@ -45,6 +45,7 @@ class ReactUeditor extends React.Component {
 
   static propTypes = {
     value: PropTypes.string,
+    editValue: PropTypes.string,
     ueditorPath: PropTypes.string.isRequired,
     plugins: PropTypes.array,
     onChange: PropTypes.func,
@@ -61,6 +62,7 @@ class ReactUeditor extends React.Component {
 
   static defaultProps = {
     value: '',
+    editValue: '',
     multipleImagesUpload: false,
     extendControls: [],
     debug: false,
@@ -168,7 +170,8 @@ class ReactUeditor extends React.Component {
       component: <VideoUploader upload={uploadVideo} progress={progress} onChange={this.videoChange} />,
       onClose: () => {
         this.setState({
-          [this.getVisibleName('videoUpload')]: false })
+          [this.getVisibleName('videoUpload')]: false
+        })
       },
       onConfirm: () => {
         if (this.ueditor) {
@@ -195,7 +198,8 @@ class ReactUeditor extends React.Component {
       component: <AudioUploader upload={uploadAudio} progress={progress} onChange={this.audioChange} />,
       onClose: () => {
         this.setState({
-          [this.getVisibleName('audioUpload')]: false })
+          [this.getVisibleName('audioUpload')]: false
+        })
       },
       onConfirm: () => {
         if (this.ueditor) {
@@ -221,7 +225,8 @@ class ReactUeditor extends React.Component {
       component: <Link onChange={this.linkChange} />,
       onClose: () => {
         this.setState({
-          [this.getVisibleName('insertLink')]: false })
+          [this.getVisibleName('insertLink')]: false
+        })
       },
       onConfirm: () => {
         this.ueditor && this.ueditor.execCommand('inserthtml', this.state.linkHtml, true)
@@ -306,7 +311,7 @@ class ReactUeditor extends React.Component {
   }
 
   initEditor = () => {
-    const { config, plugins, onChange, value, getRef, onReady } = this.props
+    const { config, plugins, onChange, editValue, value, getRef, onReady } = this.props
 
     if (plugins && plugins instanceof Array && plugins.length > 0) {
       if (plugins.indexOf('uploadImage') !== -1) this.registerImageUpload()
@@ -324,7 +329,8 @@ class ReactUeditor extends React.Component {
           cssRules: control.cssRules ? control.cssRules : '',
           onclick: () => {
             editor._react_ref.setState({
-              [this.getVisibleName(control.name)]: true })
+              [this.getVisibleName(control.name)]: true
+            })
           },
         })
 
@@ -355,7 +361,7 @@ class ReactUeditor extends React.Component {
         this.isContentChangedByWillReceiveProps = false
         this.ueditor.setContent(this.content)
       } else {
-        this.ueditor.setContent(this.content)
+        this.ueditor.setContent(editValue)
       }
 
       onReady && onReady()
