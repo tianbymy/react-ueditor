@@ -45,7 +45,6 @@ class ReactUeditor extends React.Component {
 
   static propTypes = {
     value: PropTypes.string,
-    editValue: PropTypes.string,
     ueditorPath: PropTypes.string.isRequired,
     plugins: PropTypes.array,
     onChange: PropTypes.func,
@@ -62,7 +61,6 @@ class ReactUeditor extends React.Component {
 
   static defaultProps = {
     value: '',
-    editValue: '',
     multipleImagesUpload: false,
     extendControls: [],
     debug: false,
@@ -311,7 +309,7 @@ class ReactUeditor extends React.Component {
   }
 
   initEditor = () => {
-    const { config, plugins, onChange, editValue, value, getRef, onReady } = this.props
+    const { config, plugins, onChange, value, getRef, onReady } = this.props
 
     if (plugins && plugins instanceof Array && plugins.length > 0) {
       if (plugins.indexOf('uploadImage') !== -1) this.registerImageUpload()
