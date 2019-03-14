@@ -60,7 +60,7 @@ class ReactUeditor extends React.Component {
   }
 
   static defaultProps = {
-    // value: '',
+    value: '',
     multipleImagesUpload: false,
     extendControls: [],
     debug: false,
